@@ -2,10 +2,7 @@ const code = require('../models/code.model')
 module.exports = {
     uploadCode: async(req,res,next)=>{
         try {
-            let upload = req.body.forEach(async element => {
-                let process = await code.collection.insertMany(element).exec()
-                console.log(process)
-            }); 
+            let upload = await code.collection.insertMany(req.body).exec()
             res.json(upload)
         } catch (error) {
             res.json(error)
