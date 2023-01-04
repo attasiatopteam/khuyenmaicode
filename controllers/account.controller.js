@@ -35,7 +35,7 @@ module.exports = {
                     username:account.username,
                     role:account.role,
                     site:account.site
-                },"abcxyz", {expiresIn: "1h"})
+                },"abcxyz", {expiresIn: "5h"})
                 res.json({
                     _id:account._id,
                     username:account.username,
