@@ -3,7 +3,8 @@ module.exports = {
     uploadCode: async(req,res,next)=>{
         try {
             let upload = req.body.forEach(async element => {
-                await code.collection.insertMany(element).exec()
+                let process = await code.collection.insertMany(element).exec()
+                console.log(process)
             }); 
             res.json(upload)
         } catch (error) {
