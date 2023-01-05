@@ -2,7 +2,6 @@ const accountmodel = require('../models/account.model')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-
 module.exports = {
     createAcc: async(req,res,next)=>{
         let {...body} = req.body

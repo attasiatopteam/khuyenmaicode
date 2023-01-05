@@ -29,5 +29,20 @@ module.exports = {
         .then(function (response) {
             res.json(response.data)
         }).catch(error =>console.log(error));
+    },
+    f8bet: (req,res,next)=>{
+        let data = JSON.stringify(req.body);
+        let config = {
+        method: 'post',
+        url: 'https://api.f8bet.sale/addpoint',
+        headers: { 
+            'Content-Type': 'application/json'
+        },
+        data : data
+        };
+        axios(config)
+        .then(function (response) {
+            res.json(response.data)
+        }).catch(error =>console.log(error));
     }
 }
