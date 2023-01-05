@@ -47,7 +47,6 @@ module.exports = {
                 res.json({
                     code:403,
                     mess:"Mật khẩu không chính xác",
-                    token:token
                 })
             }
         }
