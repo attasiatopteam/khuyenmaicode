@@ -19,7 +19,7 @@ module.exports = {
         let data = JSON.stringify(req.body);
         let config = {
         method: 'post',
-        url: 'https://api.h376.com//addpoint',
+        url: 'https://api.h376.com/addpoint',
         headers: { 
             'Content-Type': 'application/json'
         },
@@ -27,10 +27,7 @@ module.exports = {
         };
         axios(config)
         .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
+            res.json(response.data)
+        }).catch(error =>console.log(error));
     }
 }
