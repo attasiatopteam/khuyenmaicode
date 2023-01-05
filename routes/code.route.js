@@ -14,6 +14,6 @@ const auth = require('../middlewares/auth.middleware')
 Router.route('/').get(asyncHandle(auth),role([roleType.SUPERADMIN,roleType.ADMIN,roleType.USER]),findCode)
 .post(asyncHandle(auth),role([roleType.SUPERADMIN,roleType.ADMIN]),uploadCode)
 .patch(asyncHandle(auth),role([roleType.SUPERADMIN,roleType.ADMIN,roleType.USER]),updateCode)
-.delete(deleteCode)
+.delete(asyncHandle(auth),role([roleType.SUPERADMIN,roleType.ADMIN]),deleteCode)
 
 module.exports = Router
