@@ -10,7 +10,7 @@ const {
     deleteAcc
 } = require('../controllers/account.controller')
 const auth = require('../middlewares/auth.middleware')
-Router.route('/').get(auth,getAcc).patch(auth,updateAcc).delete(auth,deleteAcc)
+Router.route('/').get(auth,role([roleType.SUPERADMIN]),getAcc).patch(auth,role([roleType.SUPERADMIN]),updateAcc).delete(auth,role([roleType.SUPERADMIN]),deleteAcc)
 Router.route('/register').post(auth,role([roleType.SUPERADMIN]),createAcc)
 Router.route('/login').post(login)
 
