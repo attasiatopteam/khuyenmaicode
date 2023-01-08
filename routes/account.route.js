@@ -11,7 +11,7 @@ const {
 } = require('../controllers/account.controller')
 const auth = require('../middlewares/auth.middleware')
 Router.route('/').get(auth,role([roleType.SUPERADMIN]),getAcc).patch(auth,role([roleType.SUPERADMIN]),updateAcc).delete(auth,role([roleType.SUPERADMIN]),deleteAcc)
-Router.route('/register').post(createAcc)
+Router.route('/register').post(auth,role([roleType.SUPERADMIN]),createAcc)
 Router.route('/login').post(login)
 
 module.exports = Router
