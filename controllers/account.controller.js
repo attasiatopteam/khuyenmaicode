@@ -51,9 +51,7 @@ module.exports = {
                         username:account.username,
                         role:account.role,
                         site:account.site,
-                        token:token,
-                        authenticator:account.authenticator,
-                        authenticatorQr:account.authenticatorQr
+                        token:token
                     })
                 }
             }else{
