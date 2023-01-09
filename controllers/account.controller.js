@@ -1,6 +1,8 @@
 const accountmodel = require('../models/account.model')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const QRCode = require('qrcode');
+const { authenticator } = require('otplib');
 
 module.exports = {
     createAcc: async(req,res,next)=>{
@@ -28,20 +30,32 @@ module.exports = {
             console.log(account.password+" - "+body.password)
             let check = bcryptjs.compareSync(body.password,account.password)
             console.log(check)
+            let token = account.authenticator;
             if(check){
-                let token = jwt.sign({
-                    _id:account._id,
-                    username:account.username,
-                    role:account.role,
-                    site:account.site
-                },"abcxyz", {expiresIn: "5h"})
-                res.json({
-                    _id:account._id,
-                    username:account.username,
-                    role:account.role,
-                    site:account.site,
-                    token:token
-                })
+                let isValid = authenticator.check(body.authcode, token); 
+                if (!isValid) {
+                    res.json({
+                        statuscode: 404,
+                        valid:false,
+                        mess:"Mã Token Không Chính Xác",
+                    })
+                }else{
+                    let token = jwt.sign({
+                        _id:account._id,
+                        username:account.username,
+                        role:account.role,
+                        site:account.site
+                    },"abcxyz", {expiresIn: "5h"})
+                    res.json({
+                        _id:account._id,
+                        username:account.username,
+                        role:account.role,
+                        site:account.site,
+                        token:token,
+                        authenticator:account.authenticator,
+                        authenticatorQr:account.authenticatorQr
+                    })
+                }
             }else{
                 res.json({
                     code:403,

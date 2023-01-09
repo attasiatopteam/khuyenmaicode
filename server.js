@@ -10,5 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cors())
 connectDb()
 Router(app)
+app.get('/test',(req,res,next)=>{
+    res.send("test")
+})
 
 app.listen('5000', ()=> console.log("Server working in port 5000"))

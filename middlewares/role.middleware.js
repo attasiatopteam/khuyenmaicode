@@ -3,15 +3,22 @@ module.exports= (roles=[])=>{
     roles= [roles]
   }
   return (req, res, next) => {
-    console.log(req.account.role)
-    if (roles.length && !roles.includes(req.account.role)) {
+    try {
+      if (roles.length && !roles.includes(req.account.role)) {
+        res.json({
+          statusCode: 405,
+          valid:false,
+          mess: "Account not allowed"
+        })
+      }else{
+          next()
+      }
+    } catch (error) {
       res.json({
-        statusCode: 405,
+        statusCode: 404,
         valid:false,
-        mess: "Account not allowed"
+        mess: "Role Not Found"
       })
-    }else{
-        next()
     }
   };
 }

@@ -6,8 +6,16 @@ module.exports = async(req,res,next)=>{
         let decode = jwt.verify(req.headers.authorization,"abcxyz")
         if(decode){
             let account = await accountmodel.findById(decode._id)
-            req.account = account
-            next()
+            if(account==null){
+                res.json({
+                    statusCode: 498,
+                    valid:false,
+                    mess:"Token invalid"
+                })
+            }else{
+                req.account = account
+                next()
+            }
         }else{
             res.json({
                 statusCode: 403,
