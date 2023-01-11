@@ -20,12 +20,12 @@ module.exports = {
         let {...query} = req.query
         try {
             let findPlayer = await daNhanKm.find(query)
-            if(findPlayer){
+            if(findPlayer.player){
                 res.json({
                     code: 200,
                     info: findPlayer
                 })
-            }else if(!findPlayer) {
+            }else if(!findPlayer.player) {
                 res.json({
                     code: 403
                 })
