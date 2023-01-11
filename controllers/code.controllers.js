@@ -19,8 +19,9 @@ module.exports = {
     },
     updateCode: async(req,res,next)=>{
         let {...body} = req.body
+        let {...query} = req.query
         try {
-            let updateCode = await code.findOneAndUpdate({code_string:body.code_string},body,{new:true}).exec()
+            let updateCode = await code.updateMany(query,body).exec()
             res.json(updateCode)
         } catch (error) {
             res.json(error)
