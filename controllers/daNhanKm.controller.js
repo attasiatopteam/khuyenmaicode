@@ -19,8 +19,18 @@ module.exports = {
     findPlayer: async(req, res, next) => {
         let {...query} = req.query
         try {
-            let findPlayer = await daNhanKm.find(query)
-            res.json(findPlayer)
+            let findPlayer = await daNhanKm.findOne(query).exec()
+            if(findPlayer == null){
+                res.json({
+                    statusCode: 403,
+                    valid: false
+                })
+            } else {
+                res.json({
+                    statusCode: 200,
+                    valid: true
+                })
+            }
         } catch (error) {
             res.json(error)
         }
