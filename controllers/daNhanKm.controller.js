@@ -20,22 +20,9 @@ module.exports = {
         let {...query} = req.query
         try {
             let findPlayer = await daNhanKm.find(query)
-            if(findPlayer.player){
-                res.json({
-                    code: 200,
-                    info: findPlayer
-                })
-            }else if(!findPlayer.player) {
-                res.json({
-                    code: 403
-                })
-            }
-
+            res.json(findPlayer)
         } catch (error) {
-            res.json({
-                code: 403,
-                err: error
-            })
+            res.json(error)
         }
     }
 }
